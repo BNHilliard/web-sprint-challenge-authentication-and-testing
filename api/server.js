@@ -6,12 +6,26 @@ const restrict = require('./middleware/restricted.js');
 
 const authRouter = require('./auth/auth-router.js');
 const jokesRouter = require('./jokes/jokes-router.js');
-
+const session = require('express-session')
 const server = express();
 
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
+
+const sessionConfig = {
+    name: 'sessioncookie',
+    secret: 'shh',
+    cookie: {
+        secure: false,
+        maxAge: 60 * 60* 1000,
+        httpOnly: true
+    },
+    saveUninitialized: false,
+    resave: false
+}
+
+server.use(session(sessionConfig));
 
 
 server.use('/api/auth', authRouter);
