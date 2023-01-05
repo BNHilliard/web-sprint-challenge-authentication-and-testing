@@ -1,8 +1,7 @@
 const Auth = require('../auth/auth-model')
 
 module.exports  = async (req, res, next) => {
-  let {username, password} = req.body;
-  username = username.replace(/[^a-zA-Z0-9 ]/g, '').trim();
+  let {username} = req.body;
         try{
           const [user] = await Auth.findBy({username})
           if (user) {
