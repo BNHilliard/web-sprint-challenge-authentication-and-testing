@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 const JWT_SECRET = process.env.JWT_SECRET || 'shh'
 
 
-router.post('/register', checkUsernameAvailable, (req, res, next) => {
+router.post('/register', async (req, res, next) => {
   let {username, password} = req.body;
   username = username.replace(/[^a-zA-Z0-9]/g, '').trim();
   console.log(username)
@@ -17,6 +17,16 @@ router.post('/register', checkUsernameAvailable, (req, res, next) => {
    if (typeof password != 'string' || password.trim() == '' || password == null) {
     res.status(400).json({message: "username and password required"})
     return 
+}
+
+try{
+  const [user] = await Auth.findBy({username: req.body.username})
+  if (user) {
+    res.status(401).json({message: "username taken"})
+    return
+  } 
+}catch (err){
+  next(err)
 }
 
   const hash = bcrypt.hashSync(password, 8);
