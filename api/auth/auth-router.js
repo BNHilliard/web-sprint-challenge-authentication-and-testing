@@ -41,7 +41,7 @@ router.post('/login', async (req, res, next) => {
   try{
     const [user] = await Auth.findBy({username: req.body.username})
     if (user==null) {
-      next({status: 401, message: "Invalid credentials"})
+      next({status: 401, message: "invalid credentials"})
     } else {
       req.user = user
     if (bcrypt.compareSync(req.body.password, req.user.password)) {
