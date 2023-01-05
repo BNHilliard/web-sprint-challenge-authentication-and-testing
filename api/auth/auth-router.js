@@ -17,7 +17,7 @@ router.post('/register', checkUsernameAvailable, (req, res, next) => {
     return 
 }
 
-  username = username.trim();
+  username = username.replace(/[^a-zA-Z0-9 ]/g, '').trim();
   const hash = bcrypt.hashSync(password, 8);
 
     Auth.add({username, password: hash})
