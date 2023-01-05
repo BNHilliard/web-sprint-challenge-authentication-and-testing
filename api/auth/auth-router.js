@@ -9,16 +9,15 @@ const JWT_SECRET = process.env.JWT_SECRET || 'shh'
 router.post('/register', checkUsernameAvailable, (req, res, next) => {
   let {username, password} = req.body;
   username = username.replace(/[^a-zA-Z0-9 ]/g, '').trim();
-  if (typeof username != 'string' || username.trim() == '') {
+  if (typeof username != 'string' || username.trim() == '' || username == null) {
         res.status(400).json({message: "username and password required"})
         return 
   } 
-   if (typeof password != 'string' || password.trim() == '') {
+   if (typeof password != 'string' || password.trim() == '' || password == null) {
     res.status(400).json({message: "username and password required"})
     return 
 }
 
- 
   const hash = bcrypt.hashSync(password, 8);
 
     Auth.add({username, password: hash})
