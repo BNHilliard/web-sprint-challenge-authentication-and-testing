@@ -4,7 +4,7 @@ module.exports  = async (req, res, next) => {
         try{
           const [user] = await Auth.findBy({username: req.body.username})
           if (user) {
-            res.status(401).json({message: "username is unavailable"})
+            res.status(401).json({message: "taken"})
           } else {
             next()
           }

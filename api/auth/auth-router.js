@@ -12,8 +12,14 @@ router.post('/register', checkUsernameAvailable, (req, res, next) => {
         res.status(400).json({message: "username and password required"})
         return 
   } 
+   if (typeof password != 'string' || password.trim() == '') {
+    res.status(400).json({message: "username and password required"})
+    return 
+}
+
   username = username.trim();
   const hash = bcrypt.hashSync(password, 8);
+
     Auth.add({username, password: hash})
     .then(resp => {
       res.status(201).json(resp)
