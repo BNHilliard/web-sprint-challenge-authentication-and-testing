@@ -9,7 +9,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'shh'
 router.post('/register', async (req, res, next) => {
   if (!req.body.username || !req.body.password) {
     res.status(400).json({message: "username and password required"})
-  }
+  } else {
   let {username, password} = req.body;
   username = username.replace(/[^a-zA-Z0-9]/g, '').trim();
   console.log(username)
@@ -40,7 +40,7 @@ try{
       return
     }).catch(err => {
       next(err)
-    })
+    })}
   });
 
   
