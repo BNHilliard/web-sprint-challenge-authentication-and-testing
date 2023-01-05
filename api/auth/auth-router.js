@@ -8,6 +8,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'shh'
 
 router.post('/register', checkUsernameAvailable, (req, res, next) => {
   let {username, password} = req.body;
+  username = username.replace(/[^a-zA-Z0-9 ]/g, '').trim();
   if (typeof username != 'string' || username.trim() == '' || username == null) {
         res.status(400).json({message: "username and password required"})
         return 
