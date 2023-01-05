@@ -10,7 +10,7 @@ router.post('/register', async (req, res, next) => {
   let {username, password} = req.body;
   username = username.replace(/[^a-zA-Z0-9]/g, '').trim();
   console.log(username)
-  if (typeof username != 'string' || username.trim() == '' || username == null) {
+  if (!username || typeof username != 'string' || username.trim() == '') {
         res.status(400).json({message: "username and password required"})
         return 
   } 
