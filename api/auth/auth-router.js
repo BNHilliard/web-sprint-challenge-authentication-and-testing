@@ -37,10 +37,10 @@ router.post('/login', async (req, res, next) => {
  
   
    if (typeof username != 'string' || username.trim() == '') {
-    res.status(400).json({message: "username and password are required"})
+    res.status(400).json({message: "username and password required"})
     return }  
     if (typeof password != 'string' || password.trim() == '') {
-      res.status(400).json({message: "username and password are required"})
+      res.status(400).json({message: "username and password required"})
       return }  
     
 
