@@ -20,7 +20,7 @@ router.post('/register', async (req, res, next) => {
 }
 
 try{
-  const [user] = await Auth.findBy({username: req.body.username})
+  const [user] = await Auth.findBy({'username': username})
   if (user) {
     res.status(401).json({message: "username taken"})
     return
